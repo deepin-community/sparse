@@ -1,4 +1,32 @@
 #!/usr/bin/make -f
 
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+
+include /usr/share/dpkg/pkg-info.mk
+include /usr/share/dpkg/vendor.mk
+
+DH_MAKE_ARGS = SPARSE_VERSION="\$$(VERSION) ($(DEB_VENDOR): $(DEB_VERSION))" PREFIX=/usr
+
+# sparse fails to build with llvm >= 16, so disable it until this is fixed
+DH_MAKE_ARGS += HAVE_LLVM=no
+
+ifeq (,$(filter terse,$(DEB_BUILD_OPTIONS)))
+DH_MAKE_ARGS += V=1
+endif
+
 %:
 	dh $@
+
+override_dh_auto_build:
+	dh_auto_build -- $(DH_MAKE_ARGS)
+
+override_dh_auto_test:
+	dh_auto_test -- $(DH_MAKE_ARGS)
+ifeq (,$(filter nocheck,$(DEB_BUILD_OPTIONS)))
+	printf 'uname -m: %s\ngcc -dumpmachine: %s\n' $$(uname -m) $$(gcc -dumpmachine)
+# test for missing cpp symbols to compile hosted programs
+	env CHECK=./sparse ./cgcc -no-compile memops.c
+endif
+
+override_dh_auto_install:
+	dh_auto_install -- $(DH_MAKE_ARGS)

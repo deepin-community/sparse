@@ -1,0 +1,30 @@
+From: Uwe Kleine-König <uwe@kleine-koenig.org>
+Subject: Use ld --as-needed to drop superfluous dependencies
+
+This fixes:
+
+	dpkg-shlibdeps: warning: package could avoid a useless dependency if debian/sparse/usr/bin/test-inspect was not linked against libgio-2.0.so.0 (it uses none of the library's symbols)
+	dpkg-shlibdeps: warning: package could avoid a useless dependency if debian/sparse/usr/bin/test-inspect was not linked against libgdk_pixbuf-2.0.so.0 (it uses none of the library's symbols)
+	dpkg-shlibdeps: warning: package could avoid a useless dependency if debian/sparse/usr/bin/test-inspect was not linked against libpango-1.0.so.0 (it uses none of the library's symbols)
+	dpkg-shlibdeps: warning: package could avoid a useless dependency if debian/sparse/usr/bin/test-inspect was not linked against libcairo.so.2 (it uses none of the library's symbols)
+	dpkg-shlibdeps: warning: package could avoid a useless dependency if debian/sparse/usr/bin/test-inspect was not linked against libfontconfig.so.1 (it uses none of the library's symbols)
+	dpkg-shlibdeps: warning: package could avoid a useless dependency if debian/sparse/usr/bin/test-inspect was not linked against libatk-1.0.so.0 (it uses none of the library's symbols)
+	dpkg-shlibdeps: warning: package could avoid a useless dependency if debian/sparse/usr/bin/test-inspect was not linked against libpangocairo-1.0.so.0 (it uses none of the library's symbols)
+	dpkg-shlibdeps: warning: package could avoid a useless dependency if debian/sparse/usr/bin/test-inspect was not linked against libfreetype.so.6 (it uses none of the library's symbols)
+	dpkg-shlibdeps: warning: package could avoid a useless dependency if debian/sparse/usr/bin/test-inspect was not linked against libgdk-x11-2.0.so.0 (it uses none of the library's symbols)
+	dpkg-shlibdeps: warning: package could avoid a useless dependency if debian/sparse/usr/bin/test-inspect was not linked against libpangoft2-1.0.so.0 (it uses none of the library's symbols)
+
+---
+ Makefile |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+--- a/Makefile
++++ b/Makefile
+@@ -8,6 +8,7 @@
+ CC = gcc
+ CXX = g++
+ LD = $(CC)
++LDFLAGS += -Wl,--as-needed
+ AR = ar
+ 
+ CFLAGS ?= -O2 -g
