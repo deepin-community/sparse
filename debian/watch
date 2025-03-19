@@ -1,0 +1,3 @@
+version=4
+https://git.kernel.org/pub/scm/devel/sparse/sparse.git/refs/tags \
+	/pub/scm/devel/sparse/sparse.git/snapshot/sparse-([\d.]+).tar.gz

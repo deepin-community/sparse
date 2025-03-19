@@ -1,5 +1,370 @@
-template-repository (1.0-1) unstable; urgency=medium
+sparse (0.6.4-5deepin1) unstable; urgency=medium
 
-  * Initial release
+  * Use gcc-defaults.
 
- -- Tsic404 <liuheng@deepin.org>  Sat, 28 Jan 2023 13:46:49 +0800
+ -- xiangzelong <xiangzelong@deepin.org>  Wed, 19 Mar 2025 10:57:23 +0800
+
+sparse (0.6.4-5) unstable; urgency=medium
+
+  [ Diederik de Haas ]
+  * Switch to gcc-14 (Closes: #1090950)
+  * Bump Standards-Version to 4.7.0 (no changes required)
+  * Cherry pick upstream commit to fix buffer overrun (Closes: #1065020)
+
+ -- Uwe Kleine-König <ukleinek@debian.org>  Sat, 21 Dec 2024 09:27:30 +0100
+
+sparse (0.6.4-4) unstable; urgency=medium
+
+  * Disable llvm support as it fails to compile with llvm >= 16 (Closes:
+    #1051864)
+  * Switch to gcc-13
+  * Bump Standards-Version (no changes required)
+
+ -- Uwe Kleine-König <ukleinek@debian.org>  Sun, 24 Sep 2023 00:46:14 +0200
+
+sparse (0.6.4-3) unstable; urgency=medium
+
+  * Switch to gcc-12
+  * Cherry pick commit from upstream to fix "unreplaced" warnings
+  * Bump Standards-Version (no changes required)
+
+ -- Uwe Kleine-König <ukleinek@debian.org>  Mon, 12 Sep 2022 10:08:08 +0200
+
+sparse (0.6.4-2) unstable; urgency=medium
+
+  * Switch to gcc-11 (Closes: #1008580)
+
+ -- Uwe Kleine-König <ukleinek@debian.org>  Wed, 30 Mar 2022 10:20:07 +0200
+
+sparse (0.6.4-1) unstable; urgency=medium
+
+  * New upstream release
+    One fix that was cherry picked from upstream for 0.6.3-1 could be dropped.
+  * Bump Standards-Version (no changes required)
+
+ -- Uwe Kleine-König <ukleinek@debian.org>  Mon, 27 Sep 2021 22:22:58 +0200
+
+sparse (0.6.3-2) unstable; urgency=high
+
+  * Update runtime dependency to gcc-10. (Closes: #982416)
+    Thanks to Andrian Bunk for noticing that.
+
+ -- Uwe Kleine-König <ukleinek@debian.org>  Thu, 11 Feb 2021 21:28:50 +0100
+
+sparse (0.6.3-1) unstable; urgency=medium
+
+  * New upstream release
+    - all three patches originating from upstream can be dropped as they are
+      included in this release.
+    - sindex was renamed to semind, so it can be included again (see #966706),
+      this adds libsqlite3 to the list of dependencies.
+  * Cherry-pick commit to fix crash with llvm11 from upstream.
+  * Switch to gcc-10
+
+ -- Uwe Kleine-König <ukleinek@debian.org>  Sun, 08 Nov 2020 22:11:01 +0100
+
+sparse (0.6.2-2) unstable; urgency=medium
+
+  * Cherry pick patches from upstream to fix various warnings:
+    - cc651aa7b6a0 ("gensel: remove unneeded test/uninitialized warning")
+    - eb6779f6f621 ("generic: fix missing inlining of generic expression")
+    - 5bbebae38be8 ("fix build on Hurd which doesn't define PATH_MAX")
+  * Drop installing sindex which conflicts with biosquid (Closes: #966706)
+  * Switch to gtk-3
+
+ -- Uwe Kleine-König <ukleinek@debian.org>  Mon, 03 Aug 2020 21:30:52 +0200
+
+sparse (0.6.2-1) unstable; urgency=medium
+
+  * New upstream version
+    Patch "arch: change the arch when changing -m32/64" dropped as this was
+    cherry picked from upstream for 0.6.1-2.
+  * Switch to debhelper 13
+  * Standards-Version: 4.5 (no changes needed)
+
+ -- Uwe Kleine-König <ukleinek@debian.org>  Fri, 31 Jul 2020 23:46:30 +0200
+
+sparse (0.6.1-2) unstable; urgency=medium
+
+  * Cherry-pick commit from upstream to fix test failures on powerpc and
+    mipsel.
+
+ -- Uwe Kleine-König <ukleinek@debian.org>  Thu, 07 Nov 2019 08:37:27 +0100
+
+sparse (0.6.1-1) unstable; urgency=medium
+
+  * New upstream version
+    - Several patches are included upstream and were dropped accordingly
+      - dd98d9f9bbca ("machine.h: Fix MACH_NATIVE on m68k")
+      - 36a74d33c664 ("Makefile: default to LD = CC")
+      - a14a1c32f10e ("testsuite: remove unneeded -m64 from command-line")
+      - e7a833f32307 ("lib.c: move predefines out of
+                       handle_arch_m64_finalize()")
+      - 2889393c78c5 ("lib.c: move handle_arch_m64_finalize() to init_target()")
+      - 3b246718ea33 ("target.c: ignore -m64 on archs where int32_t is a long")
+      - e6e60e370f43 ("predefs: fix for MIPS system headers needing
+                       _MIPS_SZ{INT,LONG,PTR}")
+      - 949a29adb9f4 ("predefs: add arch-specific predefines")
+      - 950e23d1a5af ("cgcc: teach cgcc about Hurd/GNU")
+      - 4ba10f29f542 ("validation: Add patterns FAIL, PASS, XPASS and XFAIL to
+                       test")
+      - b40a6cb5d68b ("fix parallel install")
+      - f21358ee7ee7 ("build: honor CFLAGS & friends from environment")
+    - Refresh remaining patches
+  * Switch to gcc-9 (Closes: #944173)
+
+ -- Uwe Kleine-König <ukleinek@debian.org>  Tue, 05 Nov 2019 21:42:00 +0100
+
+sparse (0.6.0-3) unstable; urgency=medium
+
+  * Refresh patches from upstream
+  * Fix possible build failure that happened on sparc64 for 0.6.0-2. Patch
+    from upstream.
+  * New patch to honor CFLAGS from debhelper and so make the build
+    reproducible.
+
+ -- Uwe Kleine-König <ukleinek@debian.org>  Tue, 12 Feb 2019 21:42:40 +0100
+
+sparse (0.6.0-2) unstable; urgency=medium
+
+  * New patch to fix FTBFS on m68k
+  * New patch to improve grepability for failed tests
+  * New patches from upstream to address build failures in 0.6.0-1. Thanks to
+    Luc Van Oostenryck. (Closes: #921554)
+  * New patch to fix cgcc on mips.
+
+ -- Uwe Kleine-König <ukleinek@debian.org>  Thu, 07 Feb 2019 21:20:33 +0100
+
+sparse (0.6.0-1) unstable; urgency=medium
+
+  * New upstream version (Closes: #920776)
+    - Several patches are included and were dropped accordingly
+      - 3ff507b6e9e6 ("build: pass CPPFLAGS to compiler")
+      - 081679882c3f ("build: add *.o to clean-check pattern")
+      - 5844e1713cf6 ("build: only generate version.h when needed")
+    - Refresh remaining patches
+    - Drop include and pkg-config files as upstream stopped installing them
+      (c3490e701eaa ("build: remove unused support for pkgconfig"))
+  * Bump standards versions to 4.3.0 (no changes necessary)
+  * Switch to debhelper 12
+
+ -- Uwe Kleine-König <ukleinek@debian.org>  Wed, 30 Jan 2019 15:35:42 +0100
+
+sparse (0.5.2-2) unstable; urgency=medium
+
+  * Depend on gcc-8, let cgcc use the versioned compiler command and let
+    sparse use gcc-8's include files (Closes: #906472)
+  * Support "terse" in DEB_BUILD_OPTIONS
+  * Don't require root for building (Rules-Requires-Root: no)
+  * Standards-Version: 4.2.1 (no changes needed)
+
+ -- Uwe Kleine-König <ukleinek@debian.org>  Mon, 08 Oct 2018 14:25:04 +0200
+
+sparse (0.5.2-1) unstable; urgency=medium
+
+  * New upstream release (Closes: #895598)
+    - cc58fdcfb856 ("fix cgcc ELF version for ppc64/pcc64le") fixed the build
+      on ppc64
+    - Since 9d58bbdf7865 ("Makefile: provide CFLAGS for command line
+      override.") patch pass-down-cflags isn't needed any more and so was
+      dropped. Added a simpler patch to honor CPPFLAGS.
+    - several patches are included and were dropped accordingly:
+      - 23a393b1cd48 ("Sparse preprocessing bug with zero-arg variadic macros")
+      - f1e4ba13d149 ("build: disable sparse-llvm on non-x86")
+      - 4b7b6b63f606 ("cgcc: provide __ARM_PCS_VFP for armhf")
+      - 57efc7462a88 ("cgcc: teach cgcc about GNU/kFreeBSD")
+      - 2093505d7b70 ("compile-i386.c: fix a memory leak in sort_array()")
+  * move sparse.pc to /usr/lib/${DEB_HOST_MULTIARCH}/pkgconfig/
+  * Bump standards versions to 4.1.4 (no changes necessary)
+
+ -- Uwe Kleine-König <ukleinek@debian.org>  Thu, 19 Apr 2018 17:50:13 +0000
+
+sparse (0.5.1-2) unstable; urgency=medium
+
+  * Note Debian package version in sparse's version string
+  * Fix Vcs URL to not use an insecure URI
+  * Switch to debhelper 10
+  * Provide a patch description for the last patch lacking one
+  * new patch to fix FTBFS on armhf
+
+ -- Uwe Kleine-König <ukleinek@debian.org>  Tue, 26 Sep 2017 09:42:03 +0200
+
+sparse (0.5.1-1) unstable; urgency=medium
+
+  * New upstream release
+  * Additional patch from upstream:
+    - 23a393b1cd48 ("Sparse preprocessing bug with zero-arg variadic macros")
+    - 2093505d7b70 ("compile-i386.c: fix a memory leak in sort_array()")
+    - f1e4ba13d149 ("build: disable sparse-llvm on non-x86")
+  * Disable llvm on !x86
+  * Update debian/watch to look at git.kernel.org instead of the download
+    directory (which wasn't used for the last release).
+  * Standards-Version: 4.1.0 (no changes needed)
+  * new patch to improve handling of autogenerated version.h
+  * Drop Build-Depends: libedit-dev which was ony added as a work around
+    as llvm-config --libs issued -ledit.
+
+ -- Uwe Kleine-König <ukleinek@debian.org>  Fri, 22 Sep 2017 09:04:19 +0200
+
+sparse (0.5.0-4) unstable; urgency=medium
+
+  * Upload to unstable
+
+ -- Uwe Kleine-König <ukleinek@debian.org>  Sat, 12 Aug 2017 22:45:58 +0200
+
+sparse (0.5.0-3) experimental; urgency=medium
+
+  * Add Breaks: and Replaces: to sparse-test-inspect as required by package
+    split in 0.5.0-2. (Closes: #863966)
+
+ -- Uwe Kleine-König <ukleinek@debian.org>  Fri, 02 Jun 2017 14:42:55 +0200
+
+sparse (0.5.0-2) experimental; urgency=medium
+
+  * Split package to have test-inspect in a separate package. This allows to
+    install sparse without having to install tons of GTK+ and Gnome libs.
+    Patch by W. Martin Borgert (Closes: #845626)
+  * Cherry-pick two commits from upstream fixing false warnings about IS_ERR
+    when checking the kernel sources. (Closes: #862319)
+
+ -- Uwe Kleine-König <ukleinek@debian.org>  Thu, 11 May 2017 10:56:10 +0200
+
+sparse (0.5.0-1) unstable; urgency=medium
+
+  * new upstream release (Closes: #743923)
+    - upstream relicensed under MIT (Closes: #524319)
+  * provide PREFIX already at build time (Closes: #660274)
+  * Standards-Version: 3.9.6 (no changes needed)
+  * Merge 0.4.5~rc1-2, thanks to Andreas Beckmann
+  * Take over maintenance, drop Loïc from Uploaders (Closes: #794643)
+  * cherry-pick patches from upstream to make sparse multi-arch aware
+    (Closes: #755979)
+
+ -- Uwe Kleine-König <ukleinek@debian.org>  Tue, 03 Nov 2015 00:43:13 +0100
+
+sparse (0.4.5~rc1-2~deb8u1) jessie; urgency=medium
+
+  * QA upload.
+  * Rebuild for jessie.
+
+ -- Andreas Beckmann <anbe@debian.org>  Wed, 09 Sep 2015 22:28:16 +0200
+
+sparse (0.4.5~rc1-2) unstable; urgency=medium
+
+  [ Andreas Beckmann ]
+  * QA upload.
+  * Set maintainer to Debian QA Group.  (See #794643)
+  * Fix Homepage and Vcs-Browser URLs.
+  * Refresh patch to apply without fuzz.
+
+  [ Uwe Kleine-König ]
+  * Cherry-pick commit from upstream to fix build failure with llvm-3.5.
+  * Temporarily build-depend on libedit-dev because llvm-config claims to need
+    that.  (Closes: #793197)
+
+ -- Andreas Beckmann <anbe@debian.org>  Sat, 08 Aug 2015 13:17:27 +0200
+
+sparse (0.4.5~rc1-1) unstable; urgency=low
+
+  [ Uwe Kleine-König ]
+  * new upstream release candidate
+  * switch to debhelper 9 to get hardend binaries
+  * Standards-Version: 3.9.4 (no changes needed)
+  * Add patch to add --as-needed to LDFLAGS (except for LLVM).
+  * Add missing ${perl:Depends}.
+
+  [ Loïc Minier ]
+  * Use my Debian address in control.
+  * Update Vcs fields to use anonscm URLs.
+  * Don't repeat Section and Priority in binary package stanza.
+  * Fix typo in copyright file.
+  * Add watch file.
+  * Build sparse-llvm by adding llvm-dev (>= 3.0~) build-dep.
+  * Add patch to pass CFLAGS and CPPFLAGS from rules to Makefile, notably
+    hardening flags.
+
+ -- Loïc Minier <lool@debian.org>  Sat, 15 Jun 2013 01:06:33 +0200
+
+sparse (0.4.3+20110419-1) unstable; urgency=low
+
+  * Merge upstream up to 87f4a7fda3d17:
+    + Fixes build with gcc-4.6 (Closes: 625962).
+
+ -- Pierre Habouzit <madcoder@debian.org>  Sat, 07 May 2011 16:26:29 +0200
+
+sparse (0.4.3-1) unstable; urgency=low
+
+  * New upstream release (Closes: #587005):
+    + inline forward declarations are now allowed (Closes: #607432).
+  * Update Homepage (Closes: #566605).
+  * Bump standards versions to 3.9.1.
+  * Switch from cdbs to debhelper.
+  * Add libxml2-dev and libgtk2.0-dev to build-depends to build new tools
+    (Closes: #608592).
+
+ -- Pierre Habouzit <madcoder@debian.org>  Sat, 19 Mar 2011 20:26:16 +0100
+
+sparse (0.4.1-1) unstable; urgency=low
+
+  * New upstreal release.
+  * (debian/control):
+      + rename XS-VCS-* headers into VCS-*.
+      + have a real Homepage header.
+
+ -- Pierre Habouzit <madcoder@debian.org>  Sun, 18 Nov 2007 09:33:43 +0100
+
+sparse (0.4-2) unstable; urgency=low
+
+  * Upload to unstable.
+
+ -- Pierre Habouzit <madcoder@debian.org>  Fri, 12 Oct 2007 10:11:58 +0200
+
+sparse (0.4-1) experimental; urgency=low
+
+  * New upstream release: closes: #426143, #444879:
+      + (debian/copyright): update copyrights.
+  * Take over maintainance with permission from Loïc.
+  * (debian/control):
+      + add XS-Vcs-* headers.
+      + add XS-autobuild: Yes.
+  * (debian/sparse.manpages): install cgcc.1, sparse.1.
+
+ -- Pierre Habouzit <madcoder@debian.org>  Wed, 10 Oct 2007 00:55:55 +0200
+
+sparse (0.3-1) experimental; urgency=low
+
+  * New upstream release.
+    - Fixes usage of prefix versus DESTDIR in sparse.pc; closes: #404399.
+    - Pass PREFIX to all make invocations.
+    - Update path to pkg-config file.
+  * Set CFLAGS manually in debian/rules for the upstream build until it
+    permits passing additional CFLAGS; thanks Pierre Habouzit;
+    closes: #422896.
+  * Update homepage; add Homepage field to Description.
+  * Workaround bogus upstream version by passing the upstream version computed
+    by CDBS to the upstream build.
+
+ -- Loic Minier <lool@dooz.org>  Fri, 25 May 2007 18:05:17 +0200
+
+sparse (0.2-2) experimental; urgency=low
+
+  * Ship FAQ.
+
+ -- Loic Minier <lool@dooz.org>  Thu,  7 Dec 2006 21:59:18 +0100
+
+sparse (0.2-1) experimental; urgency=low
+
+  * New upstream release.
+    - Update vars for new upstream Makefile (which supports DESTDIR).
+    - Drop manual bindir creation in build/sparse which isn't needed anymore.
+  * Ship pkg-config file.
+  * Ship headers and static library.
+  * Build and ship shared library.
+
+ -- Loic Minier <lool@dooz.org>  Thu,  7 Dec 2006 17:27:13 +0100
+
+sparse (0.1-1) experimental; urgency=low
+
+  * Initial release; closes: #397780.
+
+ -- Loic Minier <lool@dooz.org>  Thu,  9 Nov 2006 13:09:59 +0100

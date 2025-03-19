@@ -1,0 +1,6 @@
+# patches from upstream
+fix-unreplaced-warnings-caused-by-using-typeof-on-in.patch
+linearize.c-fix-buffer-overrun-warning-from-fortify.patch
+
+# Debian specific adaptions
+ld-as-needed.patch
