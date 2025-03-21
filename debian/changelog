@@ -1,3 +1,9 @@
+sparse (0.6.4-5deepin2) unstable; urgency=medium
+
+  * Fix runtime deps. 
+
+ -- xiangzelong <xiangzelong@deepin.org>  Fri, 21 Mar 2025 10:28:40 +0800
+
 sparse (0.6.4-5deepin1) unstable; urgency=medium
 
   * Use gcc-defaults.

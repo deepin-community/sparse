@@ -15,7 +15,7 @@ Rules-Requires-Root: no
 
 Package: sparse
 Architecture: any
-Depends: ${misc:Depends}, ${shlibs:Depends}, ${perl:Depends}, gcc-14
+Depends: ${misc:Depends}, ${shlibs:Depends}, ${perl:Depends}, gcc
 Suggests: sparse-test-inspect
 Description: semantic parser of source files
  Sparse, the semantic parser, provides a compiler frontend capable of
